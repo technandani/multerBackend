@@ -17,7 +17,6 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("Mongo Error", err));
 
-// Schema
 const imageSchema = new mongoose.Schema({
   url: {
     type: String,
@@ -52,12 +51,11 @@ app.get("/", async (req, res) => {
 // Upload route
 app.post("/upload", async (req, res) => {
     try {
-      // Check if file exists in the request
       if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send("No files were uploaded.");
       }
   
-      const file = req.files.photo; // 'photo' should match the frontend form key
+      const file = req.files.photo; 
   
       // Upload file to Cloudinary
       cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
